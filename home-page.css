@@ -1,0 +1,49 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  max-width: 460px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+li a {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid rgb(215, 215, 215);
+  border-radius: 7px;
+  text-decoration: none;
+  color: inherit;
+}
+
+li div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+h2 {
+  font-size: 16px;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+  font-size: 14px;
+}
+
+img {
+  width: 60px;
+  height: 90px;
+  object-fit: cover;
+}
