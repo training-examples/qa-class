@@ -1,20 +1,19 @@
 import { test, expect } from '@playwright/test';
 
 test('should login', async ({ page }) => {
-  await page.goto('https://insta.livepreview.org/login');
+  await page.goto('https://mnog2f-5173.csb.app/login');
 
   const inputUsername = page.getByLabel('Username');
   await expect(inputUsername).toBeVisible();
+  await inputUsername.fill('test');
 
   const inputPassword = page.getByLabel('Password');
   await expect(inputPassword).toBeVisible();
+  await inputPassword.fill('123');
 
   const button = page.getByRole('button');
   await expect(button).toHaveText('Login');
+  await button.click();
 
-  // Task 4
-  // Use the .fill() action on both the username and the password field to fill
-  // out the login form.
-  // Then use the .click() action on the login button.
-  // Note: A login you can use is test with password 123
+  await expect(page).toHaveURL('https://mnog2f-5173.csb.app/');
 });
