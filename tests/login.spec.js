@@ -12,9 +12,9 @@ test('should login', async ({ page }) => {
   const button = page.getByRole('button');
   await expect(button).toHaveText('Login');
 
-  const signupLink = page.getByRole('link');
-  await expect(signupLink).toHaveText('Sign up');
-
-  await signupLink.click();
-  await expect(page).toHaveURL(/.*signup/);
+  // Task 4
+  // Use the .fill() action on both the username and the password field to fill
+  // out the login form.
+  // Then use the .click() action on the login button.
+  // Note: A login you can use is test with password 123
 });
