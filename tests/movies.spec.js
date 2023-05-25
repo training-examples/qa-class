@@ -28,3 +28,9 @@ test('click specific movie', async ({ page }) => {
     'With the price on his head ever increasing',
   );
 });
+
+// Task 2
+// Use a locator to get the last movie in the movie list
+// Before we click on the movie, make an assertion that it displays the release date
+// Then click the movie
+// Then make an assertion that the browser navigated to the correct details page
