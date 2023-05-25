@@ -29,8 +29,16 @@ test('click specific movie', async ({ page }) => {
   );
 });
 
-// Task 2
-// Use a locator to get the last movie in the movie list
-// Before we click on the movie, make an assertion that it displays the release date
-// Then click the movie
-// Then make an assertion that the browser navigated to the correct details page
+test('check last movie in list', async ({ page }) => {
+  await page.goto('http://127.0.0.1:5173/');
+
+  const lastLink = page.getByRole('link').last();
+
+  await expect(lastLink).toContainText('Release Date');
+
+  await lastLink.click();
+
+  await expect(page).toHaveTitle('Movie Details');
+
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Scream');
+});
