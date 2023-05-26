@@ -1,9 +1,5 @@
 import { test, expect } from '@playwright/test';
 
-// Task 6
-// Write an test similar to what we did below, but click on a post image and
-// verify that the browser has navigated to the post details page
-
 test('should render home feed', async ({ page }) => {
   await page.goto('https://mnog2f-5173.csb.app/login');
 
@@ -38,4 +34,36 @@ test('should render home feed', async ({ page }) => {
   await expect(postDetails.getByRole('paragraph').first()).toContainText(
     'like',
   );
+});
+
+test('click post image to navigate to details', async ({ page }) => {
+  await page.goto('https://mnog2f-5173.csb.app/login');
+
+  const inputUsername = page.getByLabel('Username');
+  await expect(inputUsername).toBeVisible();
+  await inputUsername.fill('test');
+
+  const inputPassword = page.getByLabel('Password');
+  await expect(inputPassword).toBeVisible();
+  await inputPassword.fill('123');
+
+  const button = page.getByRole('button');
+  await expect(button).toHaveText('Login');
+  await button.click();
+
+  await expect(page).toHaveURL('https://mnog2f-5173.csb.app/');
+
+  const firstPost = page.locator('.css-j7qwjs').first();
+  await expect(firstPost).toBeVisible();
+  const postImage = firstPost.locator('.css-1mqut64');
+  await expect(postImage).toBeVisible();
+  await postImage.click();
+
+  await expect(page).toHaveURL(/.*posts/);
+
+  const titleBar = page.getByRole('paragraph').filter({ hasText: 'Details' });
+  await expect(titleBar).toBeVisible();
+
+  const commentInput = page.getByPlaceholder('Comment');
+  await expect(commentInput).toBeVisible();
 });
