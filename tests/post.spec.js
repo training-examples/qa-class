@@ -1,10 +1,25 @@
-// Task 8
-// Write a test to create a new post.
-// Steps:
-// - Login (we have a helper for this)
-// - Find the header button and click it
-// - This will navigate to the "/posts/new" page
-// - Find the <input> element with id file-picker
-// - Use the action setInputFiles() to select an image (you will need to find your own image and put it in the project directory)
-// - Fill out the comment field
-// - Submit the form
+import { test, expect } from '@playwright/test';
+import { loginFlow } from './helpers/login.js';
+
+test('create new post', async ({ page }) => {
+  await loginFlow(page);
+
+  const headerButton = page.locator('.css-12vn8rl').getByRole('button');
+  await expect(headerButton).toBeVisible();
+  await headerButton.click();
+
+  await expect(page).toHaveURL('https://mnog2f-5173.csb.app/posts/new');
+
+  await page.locator('#file-picker').setInputFiles('example-photo.jpg');
+
+  await expect(page.locator('.css-1mqut64')).toBeVisible();
+
+  const captionText = `This is a test post (${Date.now()})`;
+  await page.getByPlaceholder('Caption').fill(captionText);
+
+  await page.getByRole('button', { name: 'Share Now' }).click();
+
+  await expect(page).toHaveURL('https://mnog2f-5173.csb.app/');
+
+  await expect(page.getByText(captionText)).toBeVisible();
+});
