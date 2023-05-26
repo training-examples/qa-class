@@ -1,5 +1,9 @@
 import { test, expect } from '@playwright/test';
 
+// Task 6
+// Write an test similar to what we did below, but click on a post image and
+// verify that the browser has navigated to the post details page
+
 test('should render home feed', async ({ page }) => {
   await page.goto('https://mnog2f-5173.csb.app/login');
 
@@ -20,19 +24,17 @@ test('should render home feed', async ({ page }) => {
   const titleBar = page.getByRole('paragraph').filter({ hasText: 'Home' });
   await expect(titleBar).toBeVisible();
 
-  const headerButton = page
-    .locator('.css-tmjbzx-MuiStack-root')
-    .getByRole('button');
+  const headerButton = page.locator('.css-12vn8rl').getByRole('button');
   await expect(headerButton).toBeVisible();
 
   // Assert that at least one post is visible on the feed
-  const firstPost = page.locator('.css-nen11g-MuiStack-root').first();
+  const firstPost = page.locator('.css-j7qwjs').first();
   await expect(firstPost).toBeVisible();
   const profilePic = firstPost.getByAltText('avatar');
   await expect(profilePic).toBeVisible();
   const postImage = firstPost.locator('.css-1mqut64');
   await expect(postImage).toBeVisible();
-  const postDetails = firstPost.locator('.css-u5m6zg-MuiStack-root');
+  const postDetails = firstPost.locator('.css-1onl7h3');
   await expect(postDetails.getByRole('paragraph').first()).toContainText(
     'like',
   );
